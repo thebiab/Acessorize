@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title> Acessorize+</title>
+    <!-- bianca -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+</head>
+<body>
+ 
+    <header>
+        <nav>
+            <ul>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="home.html">Loja</a></li>
+                <li><a href="#">Parceria</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<img class="logo" src="logo_remove.png" alt="" srcset="">
+
+<div class="paragrafo"><p class="texto">Acessorize+ leva você de volta <br> 
+   ao futuro com o melhor <br>
+     do estilo Y2K!</p> </div>
+  
+
+    <section class="section-form">
+        <form>
+            <h1 class="titulo">Login:</h1>  <p class="textinho">Se cadastre ou faça login!</p>
+            <br>
+            <label class="campos">Nome:</label><br>
+            <input type="text" id="nome" class="tbox"><br>
+            <label class="campos">E-mail:</label><br>
+            <input type="text" id="email" class="tbox"><br>
+            <label class="campos">Senha:</label><br>
+            <input type="password" id="senha" class="tbox"><br>
+            <button type="button" onclick="cadastrar()" class="button" id="cadastro">Sign Up</button>
+            <button type="button" onclick="entrar()" class="button" id="login">Sign In</button>
+        </form>
+    </section>
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+    apiKey: "AIzaSyB1AEVsCUfiPmjM5BUHwB3LQBPEBGbiVbY",
+    authDomain: "ecomercce-150bd.firebaseapp.com",
+    projectId: "ecomercce-150bd",
+    storageBucket: "ecomercce-150bd.appspot.com",
+    messagingSenderId: "470556476869",
+    appId: "1:470556476869:web:0dc2a175274ded2eb177ac"
+  };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var auth = null; // Define a variável auth globalmente
+
+        function cadastrar() {
+            firebase.auth().createUserWithEmailAndPassword(document.getElementById("email").value, document.getElementById("senha").value)
+                .then(function(user) {
+                    alert("Cadastrado com sucesso");
+                    auth = user;
+                }).catch(function(error) {
+                    alert("Falha ao cadastrar");
+                });
+        }
+
+       
+        function entrar() {
+            var email = document.getElementById("email").value;
+            var senha = document.getElementById("senha").value;
+
+            firebase.auth().signInWithEmailAndPassword(email, senha)
+                .then(function(user) {
+                    alert("Logado com sucesso");
+                    auth = user;
+                    window.location.href = "home.html"; // Redireciona para a página home.html
+                }).catch(function(error) {
+                    alert("Falha ao logar: " + error.message);
+                });
+        }
+    </script>
+</body>
+</html>
